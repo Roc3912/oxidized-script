@@ -3,7 +3,7 @@ name:ip:model:username:password:group:enable
 group默认存储配置目录为configs，如果你定义了新的group名称，那么你需要在
 /home/roc/.config/oxidized/下创建新的文件夹
 例如：
-yx-c4948-01:172.20.1.75:ios:test01:xp001:ios
+yx-c4948-01:172.16.1.75:ios:test01:xp001:ios
 我定义了该设备group为ios的组，那么我需要创建ios文件夹来存储该设备的配置
 roc@oxidized:~/.config/oxidized$ mkdir ios  
 
