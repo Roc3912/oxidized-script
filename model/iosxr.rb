@@ -10,12 +10,6 @@ class IOSXR < Oxidized::Model
     cfg.each_line.to_a[2..-2].join
   end
 
-  cmd :secret do |cfg|
-    cfg.gsub! /^(snmp-server community).*/, '\\1 <configuration removed>'
-    cfg.gsub! /secret (\d+) (\S+).*/, '<secret hidden>'
-    cfg
-  end
-
   cmd 'show platform' do |cfg|
     comment cfg
   end
@@ -30,12 +24,17 @@ class IOSXR < Oxidized::Model
     cfg
   end
 
-  cmd 'show bgp vpnv4 unicast summary nsr' do |cfg|
+  cmd 'show processes cpu' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
 
-  cmd 'show bgp ipv4 unicast summary nsr' do |cfg|
+  cmd 'show bgp ipv4 unicast summary' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+
+  cmd 'show bgp vpnv4 unicast summary' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
@@ -45,7 +44,32 @@ class IOSXR < Oxidized::Model
     cfg
   end
 
-  cmd 'show bgp vrf all' do |cfg|
+    cmd 'show bgp ipv6 unicast summary' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+
+  cmd 'show bgp vpnv6 unicast summary' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+
+  cmd 'show bgp vpnv6 unicast labels' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+  
+  cmd 'show l2vpn xconnect state up' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+  
+  cmd 'show l2vpn xconnect state down' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+  
+  cmd 'show l2vpn bridge-domain brief' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
@@ -54,13 +78,8 @@ class IOSXR < Oxidized::Model
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
-
-  cmd 'show mpls ldp neighbor' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show isis neighbors' do |cfg|
+  
+  cmd 'show isis adjacency' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
@@ -70,32 +89,37 @@ class IOSXR < Oxidized::Model
     cfg
   end
 
-  cmd 'show isis statistics' do |cfg|
+  cmd 'show isis adjacency detail' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+  
+  cmd 'show isis adjacency detail' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
 
-  cmd 'show route afi-all summary' do |cfg|
+  cmd 'show isis database' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
 
-  cmd 'show route' do |cfg|
+  cmd 'show isis route' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
 
-  cmd 'show route vrf all' do |cfg|
+  cmd 'show isis ipv6 route' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
 
-  cmd 'show ipsubscriber access-interface brief' do |cfg|
+  cmd 'show route afi-all' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
 
-  cmd 'show pppoe summary per-access-interface' do |cfg|
+  cmd 'show dhcp ipv4 proxy binding' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
@@ -104,8 +128,13 @@ class IOSXR < Oxidized::Model
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
-
-  cmd 'show dhcp ipv4 proxy binding' do |cfg|
+  
+  cmd 'show pppoe summary per-access-interface' do |cfg|
+    cfg = cfg.each_line.to_a[1..-1].join
+    cfg
+  end
+  
+  cmd 'show ipsubscriber access-interface brief' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
