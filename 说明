@@ -44,4 +44,12 @@ sudo systemctl start oxidized.service  启动进程
     cfg
   end
 
+设备模型可以包含替代过滤器，以从配置中删除潜在的敏感数据
+cmd :secret do |cfg|
+    cfg.gsub! /^(snmp-server community).*/, '\\1 <configuration removed>'
+    (...)    
+    cfg
+  end
+
+
 
