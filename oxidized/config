@@ -1,0 +1,57 @@
+---
+username: username
+password: password
+model: junos
+resolve_dns: true
+interval: 604800
+use_syslog: true
+log: "/home/roc/.config/oxidized/logs/oxidized.log"
+debug: false
+run_once: false
+threads: 100
+use_max_threads: false
+timeout: 20
+retries: 3
+prompt: !ruby/regexp /^([\w.@-]+[#>]\s?)$/
+rest: 0.0.0.0:8889
+next_adds_job: false
+vars: {}
+groups: {}
+group_map: {}
+models: {}
+pid: "/home/roc/.config/oxidized/pid"
+crash:
+  directory: "/home/roc/.config/oxidized/crashes"
+  hostnames: false
+stats:
+  history_size: 10
+input:
+  default: ssh, telnet
+  debug: false
+  ssh:
+    secure: false
+  ftp:
+    passive: true
+  utf8_encoded: true
+output:
+  default: file
+  file:
+    directory: "/home/roc/.config/oxidized/configs"
+source:
+  default: csv
+  csv:
+    file: "/home/roc/.config/oxidized/router.db"
+    delimiter: !ruby/regexp /:/
+    map:
+      name: 0
+      ip: 1
+      model: 2
+      username: 3
+      password: 4
+      group: 5
+    gpg: false
+    vars_map:
+      enable: 6
+model_map:
+  juniper: junos
+  cisco: ios
