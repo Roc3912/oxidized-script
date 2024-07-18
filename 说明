@@ -51,5 +51,7 @@ cmd :secret do |cfg|
     cfg
   end
 
+参考说明手册：
+https://www.rubydoc.info/gems/oxidized/0.15.0
 
 
