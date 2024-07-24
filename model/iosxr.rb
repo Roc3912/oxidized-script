@@ -44,7 +44,7 @@ class IOSXR < Oxidized::Model
     cfg
   end
 
-    cmd 'show bgp ipv6 unicast summary' do |cfg|
+  cmd 'show bgp ipv6 unicast summary' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
