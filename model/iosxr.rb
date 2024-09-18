@@ -10,8 +10,10 @@ class IOSXR < Oxidized::Model
     cfg.each_line.to_a[2..-2].join
   end
 
-  cmd 'show platform' do |cfg|
-    comment cfg
+  cmd :secret do |cfg|
+    cfg.gsub! /^(snmp-server community).*/, '\\1 <configuration removed>'
+    cfg.gsub! /secret (\d+) (\S+).*/, '<secret hidden>'
+    cfg
   end
 
   cmd 'show running-config' do |cfg|
@@ -20,130 +22,85 @@ class IOSXR < Oxidized::Model
   end
 
   cmd 'admin show environment' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+    comment cfg
   end
 
-  cmd 'show processes cpu' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show bgp ipv4 unicast summary' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show bgp vpnv4 unicast summary' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show bgp vpnv4 unicast labels' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show bgp ipv6 unicast summary' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show bgp vpnv6 unicast summary' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show bgp vpnv6 unicast labels' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh processes cpu' do |cfg|
+    comment cfg
   end
   
-  cmd 'show l2vpn xconnect state up' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh interfaces brief' do |cfg|
+    comment cfg
   end
   
-  cmd 'show l2vpn xconnect state down' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh ipv4 interface brief' do |cfg|
+    comment cfg
   end
   
-  cmd 'show l2vpn bridge-domain brief' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh ipv6 interface brief' do |cfg|
+    comment cfg
   end
 
-  cmd 'show mpls interfaces' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh isis neighbors' do |cfg|
+    comment cfg
   end
   
-  cmd 'show isis adjacency' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show isis route detail' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show isis adjacency detail' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh isis adjacency detail' do |cfg|
+    comment cfg
   end
   
-  cmd 'show isis adjacency detail' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show isis database' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show isis route' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show isis ipv6 route' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show route afi-all' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show dhcp ipv4 proxy binding' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
-
-  cmd 'show subscriber session  all username' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh route afi-all' do |cfg|
+    comment cfg
   end
   
-  cmd 'show pppoe summary per-access-interface' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh route vrf all' do |cfg|
+    comment cfg
+  end
+   
+  cmd 'sh bgp ipv4 unicast summary' do |cfg|
+    comment cfg
   end
   
-  cmd 'show ipsubscriber access-interface brief' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+  cmd 'sh bgp vpnv4 unicast summary' do |cfg|
+    comment cfg
   end
+  
+  cmd 'sh bgp ipv6 unicast summary' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh bgp vpnv4 unicast summary' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh l2vpn xconnect state up' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh l2vpn xconnect state down' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh l2vpn bridge-domain brief' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh pppoe summary per-access-interface' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh ipsubscriber access-interface brief' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh dhcp ipv4 proxy binding' do |cfg|
+    comment cfg
+  end
+  
+  cmd 'sh logging' do |cfg|
+    comment cfg
+  end 
 
-  cmd 'show subscriber session all summary' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
-  end
- 
   cfg :telnet do
     username /^Username:/
     password /^\r?Password:/
