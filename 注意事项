@@ -40,8 +40,7 @@ sudo systemctl start oxidized.service  启动进程
 三、脚本内容
 按照预先配置的命令执行内容
   cmd 'show running-config' do |cfg|
-    cfg = cfg.each_line.to_a[1..-1].join
-    cfg
+    comment cfg
   end
 
 设备模型可以包含替代过滤器，以从配置中删除潜在的敏感数据
