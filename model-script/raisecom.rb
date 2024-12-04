@@ -5,12 +5,10 @@ class RAISECOM < Oxidized::Model
   prompt /([>\-#]\s?)$/
 
   cmd 'show version' do |cfg|
-    cfg.gsub! /\s(System uptime is ).*/, ' \\1 <removed>'
     comment cfg
   end
 
   cmd 'show running-config' do |cfg|
-    cfg.gsub! /\s(^radius-encrypt-key ).*/, ' \\1 <removed>'
     cfg
   end
 
