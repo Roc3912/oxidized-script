@@ -9,7 +9,7 @@ class RAISECOM < Oxidized::Model
   end
 
   cmd 'show running-config' do |cfg|
-    cfg
+    comment cfg
   end
 
   cfg :telnet do
