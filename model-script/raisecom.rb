@@ -1,7 +1,7 @@
 class RAISECOM < Oxidized::Model
   using Refinements
 
-  comment '! '
+  comment '!' ##在每行添加 ！注释，如果想去除可以' '
   prompt /([>\-#]\s?)$/
 
   cmd 'show version' do |cfg|
