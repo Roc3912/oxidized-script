@@ -1,0 +1,7 @@
+dnf update  ##更新系统组件
+dnf  groupinstall "Development Tools"  ##启用开发环境
+dnf install rubygems ##启用ruby环境
+dnf install make cmake which sqlite-devel openssl-devel ruby ruby-devel libicu-devel  -y  ##安装对应环境
+gem install oxidized 
+gem install oxidized-script oxidized-web
+
