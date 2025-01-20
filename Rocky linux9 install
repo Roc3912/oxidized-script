@@ -5,3 +5,18 @@ dnf install make cmake which sqlite-devel openssl-devel ruby ruby-devel libicu-d
 gem install oxidized 
 gem install oxidized-script oxidized-web
 
+
+
+配置推送到git
+output:
+  default: git
+  git:
+    user: "your name"
+    email: youremail@yourdomain.com
+    repo: "/home/oxidized/.config/oxidized/oxidized.git"
+
+cd /home/oxidized/.config/oxidized/oxidized.git
+git config --global user.name "your name"
+git config --global user.email "youremail@yourdomain.com"
+git remote add origin git@gitlab.yourdomain.com:yourgitrepousername/oxidized.git
+git push -u origin master
