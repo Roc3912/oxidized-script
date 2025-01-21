@@ -11,6 +11,11 @@ class RAISECOM < Oxidized::Model
   cmd 'show running-config' do |cfg|
     comment cfg
   end
+  
+ cmd 'terminal page-break enable' do |cfg|
+    comment cfg
+    cfg
+  end
 
   cfg :telnet do
     username /Login:/       # 根据实际提示符修改
