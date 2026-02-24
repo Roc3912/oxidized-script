@@ -1,44 +1,48 @@
-class IOS < Oxidized::Model
+class ZTE < Oxidized::Model
   using Refinements
+  
+  #
 
   prompt /^([\w.@()-]+[#>]\s?)$/
   comment  '! '
 
   cmd :all do |cfg|
-  #  cfg.gsub! /^% Invalid input detected at '\^' marker\.$|^\s+\^$/, ''
-  #  cfg.cut_both
+  #  cfg.each_line.to_a[1..-1].join
     cfg
   end
   
   cmd 'show version' do |cfg|
     comment cfg
   end
-  
+
   cmd 'show running-config' do |cfg|
     cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
-  
-  cmd 'show environment' do |cfg|
+
+  cmd 'show ip int brief' do |cfg|
+    comment cfg
+  end
+
+  cmd 'show int brief' do |cfg|
     comment cfg
   end
   
-  cmd 'show processes cpu' do |cfg|
+  cmd 'show fan-status' do |cfg|
     comment cfg
   end
   
-  cmd 'show interfaces status' do |cfg|
+  cmd 'show power-status' do |cfg|
     comment cfg
   end
   
-  cmd 'show ip interface  brief' do |cfg|
+  cmd 'show power-status' do |cfg|
     comment cfg
   end
- 
+  
   cmd 'show logging' do |cfg|
     comment cfg
   end
-  
 
   cfg :telnet do
     username /^Username:/i

@@ -1,55 +1,40 @@
 class NXOS < Oxidized::Model
   using Refinements
 
-  prompt /^(\r?[\w.@_()-]+[#]\s?)$/
+  prompt /^(\r?[\w.@_()-]+\#\s?)$/
   comment '! '
 
-  def filter(cfg)
-    cfg.gsub! /\r\n?/, "\n"
-    cfg.gsub! prompt, ''
-  end
-
-  cmd :secret do |cfg|
-    cfg.gsub! /^(snmp-server community).*/, '\\1 <secret hidden>'
-    cfg.gsub! /^(snmp-server user (\S+) (\S+) auth (\S+)) (\S+) (priv) (\S+)/, '\\1 <secret hidden> '
-    cfg.gsub! /^(snmp-server host.*? )\S+( udp-port \d+)?$/, '\\1<secret hidden>\\2'
-    cfg.gsub! /(password \d+) (\S+)/, '\\1 <secret hidden>'
-    cfg.gsub! /^(radius-server key).*/, '\\1 <secret hidden>'
-    cfg.gsub! /^(tacacs-server .*key(?: \d+)?) \S+/, '\\1 <secret hidden>'
+  cmd :all do |cfg|
+  #  cfg.cut_both
     cfg
   end
 
   cmd 'show version' do |cfg|
-    cfg = filter cfg
-    cfg = cfg.each_line.take_while { |line| not line.match(/uptime/i) }
-    comment cfg.join
+    comment cfg
   end
-
+  
   cmd 'show running-config' do |cfg|
-    cfg = filter cfg
-    cfg.gsub! /^(show run.*)$/, '! \1'
-    cfg.gsub! /^!Time:[^\n]*\n/, ''
-    cfg.gsub! /^[\w.@_()-]+[#].*$/, ''
+    cfg = cfg.each_line.to_a[1..-1].join
     cfg
   end
-
-  cmd 'sh interface brief' do |cfg|
+  
+  cmd 'show environment' do |cfg|
     comment cfg
   end
 
-  cmd 'sh ip interface brief' do |cfg|
+  cmd 'show processes cpu' do |cfg|
     comment cfg
   end
   
-  cmd 'sh environment' do |cfg|
-    comment cfg
-  end
-
-  cmd 'sh processes cpu' do |cfg|
+  cmd 'show interfaces status' do |cfg|
     comment cfg
   end
   
-  cmd 'sh logging last 300' do |cfg|
+  cmd 'show ip interface  brief' do |cfg|
+    comment cfg
+  end
+ 
+  cmd 'show logging last 200' do |cfg|
     comment cfg
   end
 
