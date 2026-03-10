@@ -3,25 +3,48 @@ username: username
 password: password
 model: junos
 resolve_dns: true
-interval: 604800
-use_syslog: true
-log: "/home/roc/.config/oxidized/logs/oxidized.log"
+interval: 3600
 debug: false
+#log: "/root/.config/oxidized/logs/oxidized.log"
+logger:
+# level: :trace
+  appenders:
+    - type: syslog
+      level: info
+    - type: file
+      file: "/root/.config/oxidized/logs/info.log"
 run_once: false
-threads: 100
-use_max_threads: false
+threads: 30
+use_max_threads: true
 timeout: 20
+timelimit: 300
 retries: 3
 prompt: !ruby/regexp /^([\w.@-]+[#>]\s?)$/
-rest: 0.0.0.0:8889
 next_adds_job: false
 vars: {}
-groups: {}
+groups: 
+  hudong1:
+    username: 
+    password: 
+    vars:
+      enable: 
+  hudong2:
+    username: 
+    password: 
+  wan:
+    username: 
+    password: 
 group_map: {}
 models: {}
-pid: "/home/roc/.config/oxidized/pid"
+pid: "/root/.config/oxidized/pid"
+extensions:
+  oxidized-web:
+    load: true
+    port: 8080
+    listen: 0.0.0.0
+    url_prefix: roc
 crash:
-  directory: "/home/roc/.config/oxidized/crashes"
+  directory: "/root/.config/oxidized/crashes"
   hostnames: false
 stats:
   history_size: 10
@@ -36,22 +59,18 @@ input:
 output:
   default: file
   file:
-    directory: "/home/roc/.config/oxidized/configs"
+    directory: "/root/.config/oxidized/configs"
 source:
   default: csv
   csv:
-    file: "/home/roc/.config/oxidized/router.db"
+    file: "/root/.config/oxidized/router.db"
     delimiter: !ruby/regexp /:/
     map:
       name: 0
       ip: 1
       model: 2
-      username: 3
-      password: 4
-      group: 5
+      group: 3
     gpg: false
-    vars_map:
-      enable: 6
 model_map:
   juniper: junos
   cisco: ios
